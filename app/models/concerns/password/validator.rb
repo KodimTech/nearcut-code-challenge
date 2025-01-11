@@ -9,6 +9,7 @@ module Password
       before_validation :valid_length?
       before_validation :valid_lowercase?
       before_validation :valid_upcase?
+      before_validation :has_consecutive_chars?
     end
 
     private
@@ -26,6 +27,10 @@ module Password
 
     def valid_upcase?
       errors.add(:password, "must include at least one uppercase character") unless password.match?(/[A-Z]/)
+    end
+
+    def has_consecutive_chars?
+      errors.add(:password, "must not include consecutive characters") if password.match?(/(.)\1\1/i)
     end
   end
 end
