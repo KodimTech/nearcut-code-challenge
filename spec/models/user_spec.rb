@@ -20,9 +20,19 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'constants' do
+    it 'has a MIN_LENGTH constant' do
+      expect(User::PASSWORD_MIN_LENGTH).to eq(10)
+    end
+
+    it 'has a MAX_LENGTH constant' do
+      expect(User::PASSWORD_MAX_LENGTH).to eq(16)
+    end
+  end
+
   describe 'validations' do
     describe 'before_validation' do
-      describe '#valid_length?' do
+      describe '#has_valid_length?' do
         context 'when password doesn\'t meet minimum or maximum length' do
           it 'adds an error to the password attribute' do
             user.password = SecureRandom.hex(4)
@@ -62,6 +72,17 @@ RSpec.describe User, type: :model do
             user.valid?
 
             expect(user.errors[:password]).to include('must not include consecutive characters')
+          end
+        end
+      end
+
+      describe '#has_digits?' do
+        context 'when password doesn\'t include a digit' do
+          it 'adds an error to the password attribute' do
+            user.password = "AqpfkSswods"
+            user.valid?
+
+            expect(user.errors[:password]).to include('must include at least one digit')
           end
         end
       end
