@@ -43,6 +43,17 @@ RSpec.describe User, type: :model do
           end
         end
       end
+
+      describe '#valid_upcase?' do
+        context 'when password doesn\'t include an uppercase character' do
+          it 'adds an error to the password attribute' do
+            user.password = SecureRandom.hex(5).downcase
+            user.valid?
+
+            expect(user.errors[:password]).to include('must include at least one uppercase character')
+          end
+        end
+      end
     end
   end
 end
