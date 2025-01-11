@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
     name { Faker::Name.name }
-    password_digest { SecureRandom.hex }
+    password { SecureRandom.hex }
   end
 end
