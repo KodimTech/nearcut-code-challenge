@@ -2,35 +2,41 @@ module Password
   module Validator
     extend ActiveSupport::Concern
 
-    MIN_LENGTH = 10
-    MAX_LENGTH = 16
+    PASSWORD_MIN_LENGTH = 10
+    PASSWORD_MAX_LENGTH = 16
 
     included do
-      before_validation :valid_length?
-      before_validation :valid_lowercase?
-      before_validation :valid_upcase?
+      before_validation :has_valid_length?
+      before_validation :has_lowercase_char?
+      before_validation :has_upcase_char?
       before_validation :has_consecutive_chars?
+      before_validation :has_digits?
     end
 
     private
 
-    def valid_length?
+    def has_valid_length?
       errors.add(
         :password,
-        "must be between #{MIN_LENGTH} and #{MAX_LENGTH} characters"
-      ) unless (MIN_LENGTH..MAX_LENGTH).include?(password.length)
+        "must be between #{PASSWORD_MIN_LENGTH} and #{PASSWORD_MAX_LENGTH} characters"
+      ) unless (PASSWORD_MIN_LENGTH..PASSWORD_MAX_LENGTH).include?(password.length)
     end
 
-    def valid_lowercase?
+    def has_lowercase_char?
       errors.add(:password, "must include at least one lowercase character") unless password.match?(/[a-z]/)
     end
 
-    def valid_upcase?
+    def has_upcase_char?
       errors.add(:password, "must include at least one uppercase character") unless password.match?(/[A-Z]/)
     end
 
     def has_consecutive_chars?
-      errors.add(:password, "must not include consecutive characters") if password.match?(/(.)\1\1/i)
+      cleaned_password = password.gsub(/[^a-zA-Z]/, " ")
+      errors.add(:password, "must not include consecutive characters") if cleaned_password.match?(/([a-zA-Z])\1{2}/i)
+    end
+
+    def has_digits?
+      errors.add(:password, "must include at least one digit") unless password.match?(/\d/)
     end
   end
 end
