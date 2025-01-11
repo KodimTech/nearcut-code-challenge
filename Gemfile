@@ -44,6 +44,7 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  gem "dotenv", "3.1.7"
   gem "factory_bot_rails", "6.4.4"
   gem "rspec-rails", "7.1.0"
   gem "shoulda-matchers", "6.4"
