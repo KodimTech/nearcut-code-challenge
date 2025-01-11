@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "activerecord-import", "2.0"
+gem "faker", "3.5.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.1"
@@ -20,7 +21,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "3.1.20"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -45,6 +46,7 @@ gem "thruster", require: false
 group :development, :test do
   gem "factory_bot_rails", "6.4.4"
   gem "rspec-rails", "7.1.0"
+  gem "shoulda-matchers", "6.4"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 

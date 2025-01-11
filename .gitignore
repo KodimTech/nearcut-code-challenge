@@ -35,3 +35,6 @@
 
 # Ignore rubymine files
 .idea
+
+# Ignore simplecov files
+/coverage
