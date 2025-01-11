@@ -54,6 +54,17 @@ RSpec.describe User, type: :model do
           end
         end
       end
+
+      describe '#has_consecutive_chars?' do
+        context 'when password includes consecutive characters' do
+          it 'adds an error to the password attribute' do
+            user.password = SecureRandom.hex(5) + 'AaA'
+            user.valid?
+
+            expect(user.errors[:password]).to include('must not include consecutive characters')
+          end
+        end
+      end
     end
   end
 end
