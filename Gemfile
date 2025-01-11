@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem "activerecord-import", "2.0"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -41,6 +43,8 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  gem "factory_bot_rails", "6.4.4"
+  gem "rspec-rails", "7.1.0"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
@@ -57,6 +61,9 @@ group :development do
 end
 
 group :test do
+  gem "database_cleaner-active_record", "2.2"
+  gem "simplecov", "0.22.0", require: false
+
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
