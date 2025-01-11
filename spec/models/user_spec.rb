@@ -32,6 +32,17 @@ RSpec.describe User, type: :model do
           end
         end
       end
+
+      describe '#valid_lowercase?' do
+        context 'when password doesn\'t include a lowercase character' do
+          it 'adds an error to the password attribute' do
+            user.password = SecureRandom.hex(5).upcase
+            user.valid?
+
+            expect(user.errors[:password]).to include('must include at least one lowercase character')
+          end
+        end
+      end
     end
   end
 end

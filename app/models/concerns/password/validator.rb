@@ -7,6 +7,7 @@ module Password
 
     included do
       before_validation :valid_length?
+      before_validation :valid_lowercase?
     end
 
     private
@@ -16,6 +17,10 @@ module Password
         :password,
         "must be between #{MIN_LENGTH} and #{MAX_LENGTH} characters"
       ) unless (MIN_LENGTH..MAX_LENGTH).include?(password.length)
+    end
+
+    def valid_lowercase?
+      errors.add(:password, "must include at least one lowercase character") unless password.match?(/[a-z]/)
     end
   end
 end
