@@ -8,6 +8,7 @@ module Password
     included do
       before_validation :valid_length?
       before_validation :valid_lowercase?
+      before_validation :valid_upcase?
     end
 
     private
@@ -21,6 +22,10 @@ module Password
 
     def valid_lowercase?
       errors.add(:password, "must include at least one lowercase character") unless password.match?(/[a-z]/)
+    end
+
+    def valid_upcase?
+      errors.add(:password, "must include at least one uppercase character") unless password.match?(/[A-Z]/)
     end
   end
 end
