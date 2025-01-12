@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="card">
+
+    <h3>Uploaded file results</h3>
+
+    <div class="drop_box results" style="margin-bottom: 1rem">
+      <header>
+        <h3>Valid rows count: <%= results.valid_rows.size %></h3>
+
+        <% results.valid_rows.each do |result| %>
+          - <span>Row number: <%= result[:row_number] %></span><br>
+        <% end %>
+      </header>
+
+      <header style="margin-top: 1.5rem">
+        <h3>Invalid rows count: <%= results.invalid_rows.size %></h3>
+
+        <% results.invalid_rows.each do |result| %>
+          - <span>Row number: <%= result[:row_number] %>, Error(s): <%= result[:errors].join(", ") %></span><br>
+        <% end %>
+      </header>
+    </div>
+
+    <%= link_to "Upload another file", root_path, class: 'btn' %>
+  </div>
+</div>

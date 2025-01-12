@@ -1,0 +1,44 @@
+<%= turbo_frame_tag "results" do %>
+
+  <%= form_with url: users_path,
+                method: :post,
+                data: {
+                  controller: "components--file-input",
+                  "components--file-input-target": "form"
+                } do |form| %>
+    <div class="container">
+      <div class="card">
+        <h3>Users</h3>
+        <div class="drop_box" data-components--file-input-target="dropBox">
+
+          <header data-components--file-input-target="header">
+            <h4>Upload File</h4>
+          </header>
+
+          <p>Files Supported: CSV</p>
+
+          <%= form.file_field :file,
+                              id: "fileID",
+                              required: true,
+                              accept: "text/csv",
+                              data: { "components--file-input-target": "input" } %>
+
+          <button class="btn"
+                  id="choose-file-button"
+                  data-components--file-input-target="uploadButton"
+                  data-action="click->components--file-input#fileUpload">
+            Choose File
+          </button>
+        </div>
+
+        <button class="btn btn-submit"
+                id="submit-button"
+                type="submit"
+                data-components--file-input-target="submitButton"
+                data-action="click->components--file-input#submitForm">
+          Submit File
+        </button>
+      </div>
+    </div>
+  <% end %>
+<% end %>
