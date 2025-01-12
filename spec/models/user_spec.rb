@@ -31,7 +31,25 @@ RSpec.describe User, type: :model do
   end
 
   describe 'validations' do
-    describe 'before_validation' do
+    describe 'name field' do
+      it 'validates presence of name' do
+        user.name = nil
+        user.valid?
+
+        expect(user.errors[:name]).to include('can\'t be blank')
+      end
+    end
+
+    describe 'password field' do
+      describe '#has_empty_password?' do
+        it 'validates presence of password' do
+          user.password = nil
+          user.valid?
+
+          expect(user.errors[:password]).to include('must not be empty')
+        end
+      end
+
       describe '#has_valid_length?' do
         context 'when password doesn\'t meet minimum or maximum length' do
           it 'adds an error to the password attribute' do
