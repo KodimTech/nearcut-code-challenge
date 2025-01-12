@@ -1,7 +1,9 @@
 source "https://rubygems.org"
 
 gem "activerecord-import", "2.0"
+gem "csv", "3.3.2"
 gem "faker", "3.5.1"
+gem "view_component", "3.21"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.1"

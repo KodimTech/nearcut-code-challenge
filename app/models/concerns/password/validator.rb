@@ -6,14 +6,24 @@ module Password
     PASSWORD_MAX_LENGTH = 16
 
     included do
-      before_validation :has_valid_length?
-      before_validation :has_lowercase_char?
-      before_validation :has_upcase_char?
-      before_validation :has_consecutive_chars?
-      before_validation :has_digits?
+      validates :password, presence: true
+
+      validate :has_empty_password?
+      validate :has_valid_length?
+      validate :has_lowercase_char?
+      validate :has_upcase_char?
+      validate :has_consecutive_chars?
+      validate :has_digits?
     end
 
     private
+
+    def has_empty_password?
+      return unless password.blank?
+
+      errors.add(:password, "must not be empty")
+      throw(:abort)
+    end
 
     def has_valid_length?
       errors.add(
