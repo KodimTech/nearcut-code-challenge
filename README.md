@@ -34,5 +34,7 @@ Deployment was made to Fly.io and the project is available at: [https://rails-ch
 Continuous deployment was set up using the Fly.io GitHub Action but it does not trigger automatically, didn't find it necessary for this project,
 but it's part of my stack knowledge.
 
+No css library was used, as you didn't mention on your job description, I decided to use a example on codepen to make it look a little bit better.
+
 It was a pleasure to work on this challenge, I hope you enjoy it.
 
