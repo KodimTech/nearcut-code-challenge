@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "activerecord-import", "2.0"
+gem "activerecord-import", "2.1.0"
 gem "csv", "3.3.2"
 gem "dockerfile-rails", ">= 1.7", group: :development
 gem "faker", "3.5.1"
